@@ -16,16 +16,16 @@
     <section class="user-list">
       <h2>Participantes</h2>
       <ul>
-        <li class="user" v-for="rsvp in rsvps" v-on:click="setMember(rsvp.member)">
-          {{ rsvp.member.name }}
+        <li class="user">
+          Filipe Merker
         </li>
       </ul>
     </section>
     <section class="user-list">
       <h2>Não comparecerão</h2>
       <ul>
-        <li class="user inactive" v-for="rsvp in declinedRsvpList">
-          {{ rsvp.member.name }}
+        <li class="user inactive">
+          Filipe Merker
         </li>
       </ul>
     </section>
@@ -35,25 +35,35 @@
 <script>
 export default {
   name: 'app',
-  methods: {
-    setMember(member) {
-      this.$store.dispatch('GET_MEMBER', member)
+  data() {
+    return {
+      'member': {
+        'country': 'br',
+        'city': 'Porto Alegre',
+        'topics': [],
+        'joined': 1503584200000,
+        'link': 'http://www.meetup.com/members/234792414',
+        'photo': {
+          'highres_link': 'https://secure.meetupstatic.com/photos/member/3/1/7/7/highres_270012663.jpeg',
+          'photo_id': 270012663,
+          'base_url': 'https://secure.meetupstatic.com',
+          'type': 'member',
+          'photo_link': 'https://secure.meetupstatic.com/photos/member/3/1/7/7/member_270012663.jpeg',
+          'thumb_link': 'https://secure.meetupstatic.com/photos/member/3/1/7/7/thumb_270012663.jpeg'
+        },
+        'lon': -51.220001220703125,
+        'other_services': {},
+        'name': 'Filipe Merker',
+        'visited': 1505612288000,
+        'self': {
+          'common': {}
+        },
+        'id': 234792414,
+        'lang': 'pt_BR',
+        'lat': -30.040000915527344,
+        'status': 'active'
+      }
     }
-  },
-  mounted() {
-    this.$store.dispatch('GET_RSVP_LIST')
-  },
-  computed: {
-    member() {
-      return this.$store.state.member
-    },
-    rsvps() {
-      return this.$store.state.rsvps
-    },
-    declinedRsvpList() {
-      return this.$store.getters.declinedRsvpList
-    }
-
   }
 }
 </script>
