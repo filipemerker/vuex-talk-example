@@ -14,7 +14,7 @@
       </transition>
     </section>
     <section class="user-list">
-      <h2>Participantes</h2>
+      <h2>Participantes <div class="select">(Selecione um)</div></h2>
       <ul>
         <li class="user" v-for="rsvp in rsvps" v-on:click="setMember(rsvp.member)">
           {{ rsvp.member.name }}
@@ -80,6 +80,11 @@ export default {
   .title {
     font-weight: 900;
     font-size: 70px;
+  }
+  .select {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 14px;
   }
   .subtitle {
     font-size: 28px;
