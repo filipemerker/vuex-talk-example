@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <transition name="fade" mode="out-in">
+      <div v-if="loading" class="spinner-wrapper">
+        <div class="spinner"></div>
+      </div>
+    </transition>
     <section class="display">
       <header>
         <h1 class="title">Meetup vue.js</h1>
@@ -13,35 +18,47 @@
         </div>
       </transition>
     </section>
-    <section class="user-list">
-      <h2>Participantes <div class="select">(Selecione um)</div></h2>
-      <ul>
-        <li class="user" v-for="rsvp in rsvps" v-on:click="setMember(rsvp.member)">
-          {{ rsvp.member.name }}
-        </li>
-      </ul>
-    </section>
-    <section class="user-list">
-      <h2>Não comparecerão</h2>
-      <ul>
-        <li class="user inactive" v-for="rsvp in declinedRsvpList">
-          {{ rsvp.member.name }}
-        </li>
-      </ul>
-    </section>
+    <transition-group name="fade" mode="out-in">
+      <section key="rsvps" v-if="rsvps.length" class="user-list">
+        <h2>Participantes <div class="select">(Selecione um)</div></h2>
+        <ul>
+          <li class="user" v-for="rsvp in rsvps" v-on:click="setMember(rsvp.member)">
+            {{ rsvp.member.name }}
+          </li>
+        </ul>
+      </section>
+      <section key="declinedRsvpList" v-if="declinedRsvpList.length" class="user-list">
+        <h2>Não comparecerão</h2>
+        <ul>
+          <li class="user inactive" v-for="rsvp in declinedRsvpList">
+            {{ rsvp.member.name }}
+          </li>
+        </ul>
+      </section>
+    </transition-group>
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      loading: true
+    }
+  },
   methods: {
     setMember(member) {
-      this.$store.dispatch('GET_MEMBER', member)
+      this.loading = true;
+      this.$store.dispatch('GET_MEMBER', member).then(() => {
+        this.loading = false;
+      });
     }
   },
   mounted() {
-    this.$store.dispatch('GET_RSVP_LIST')
+    this.$store.dispatch('GET_RSVP_LIST').then(() => {
+      this.loading = false;
+    });
   },
   computed: {
     member() {
@@ -76,6 +93,48 @@ export default {
     display: inline-block;
     width: 100%;
     color: white;
+  }
+
+  @keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+  .spinner-wrapper {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .4)
+  }
+  .spinner {
+    background: #f7f7f7;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+  .spinner:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -13px;
+    margin-left: -13px;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #00c187;
+    border-top-color: #f7f7f7;
+    animation: spinner .6s linear infinite;
   }
   .title {
     font-weight: 900;
