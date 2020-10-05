@@ -8,7 +8,7 @@ const instance = axios.create({
 })
 
 const getRsvpList = () => instance.get(`Meetup-de-Vue-js-Porto-Alegre/events/241796363/rsvps`)
-const getMember = id => instance.get(`2/member/${id}?&key=${key}&sign=true&photo-host=public&hash=${Math.random()}`)
+const getMember = id => instance.get(`Meetup-de-Vue-js-Porto-Alegre/members/${id}`)
 
 export default {
   getRsvpList,
