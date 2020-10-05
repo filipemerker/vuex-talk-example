@@ -20,7 +20,7 @@
     </section>
     <transition-group name="fade" mode="out-in">
       <section key="rsvps" v-if="rsvps.length" class="user-list">
-        <h2>RSVP List <div class="select">(<strong>click</strong> um)</div></h2>
+        <h2>RSVP List <div class="select">(<strong>click</strong> one)</div></h2>
         <ul>
           <li class="user" v-for="rsvp in rsvps" v-on:click="setMember(rsvp.member)">
             {{ rsvp.member.name }}
