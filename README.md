@@ -1,4 +1,4 @@
-# 👤 Vuex Talk Example?
+# 👤 Vuex Talk Example
 
 This project was used as an example to my **vuex in depth** Meetup talk back in 2017
 
