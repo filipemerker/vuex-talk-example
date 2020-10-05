@@ -12,7 +12,7 @@
       </header>
       <transition name="fade" mode="out-in">
         <div v-if="member.name" class="user-detail">
-          <h2>Usuário selecionado</h2>
+          <h2>Selected RSVP</h2>
           <img class="photo" v-if="member.photo && member.photo.photo_link" :src="member.photo.photo_link" />
           <h3>{{ member.name }}</h3>
         </div>
@@ -20,7 +20,7 @@
     </section>
     <transition-group name="fade" mode="out-in">
       <section key="rsvps" v-if="rsvps.length" class="user-list">
-        <h2>Participantes <div class="select">(Selecione um)</div></h2>
+        <h2>RSVP List <div class="select">(<strong>click</strong> um)</div></h2>
         <ul>
           <li class="user" v-for="rsvp in rsvps" v-on:click="setMember(rsvp.member)">
             {{ rsvp.member.name }}
@@ -28,7 +28,7 @@
         </ul>
       </section>
       <section key="declinedRsvpList" v-if="declinedRsvpList.length" class="user-list">
-        <h2>Não comparecerão</h2>
+        <h2>Declined RSVP List</h2>
         <ul>
           <li class="user inactive" v-for="rsvp in declinedRsvpList">
             {{ rsvp.member.name }}
@@ -49,16 +49,19 @@ export default {
   },
   methods: {
     setMember(member) {
-      this.loading = true;
+      this.loading = true
       this.$store.dispatch('GET_MEMBER', member).then(() => {
-        this.loading = false;
-      });
+        this.loading = false
+      })
     }
   },
   mounted() {
-    this.$store.dispatch('GET_RSVP_LIST').then(() => {
-      this.loading = false;
-    });
+    this.$store.dispatch('GET_RSVP_LIST')
+      .then(() => {
+        const [rsvp] = this.rsvps
+
+        this.setMember(rsvp.member)
+      })
   },
   computed: {
     member() {
