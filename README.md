@@ -1,19 +1,8 @@
-# vue-app
+# What is this project about?
 
-> This app was created to explain vuex main features on my 2017 Meetup talk
+> This project is an example used on my Meetup talk about **vuex meetup talk** in 2017
+
+It uses the meetup.com v3 API to query users and **store them in vuex** so you can interact with them.
 
 ## Live example
 [https://filipemerker.github.io/meetup-vuex-experiment/](https://filipemerker.github.io/meetup-vuex-experiment/)
-
-## Build Setup
-
-``` bash
-# install dependencies
-yarn
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
