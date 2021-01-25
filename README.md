@@ -1,6 +1,8 @@
-# vue-app
+# 👤 Vuex Talk Example
 
-> This app was created to explain vuex main features on my 2017 Meetup talk
+> This project was used as an example to my **vuex in depth** Meetup talk back in 2017
+
+> It uses the meetup.com v3 API to query users and **store them in vuex** so we can interact with them.
 
 ## Live example
 [https://filipemerker.github.io/vuex-talk-example/](https://filipemerker.github.io/vuex-talk-example/)
