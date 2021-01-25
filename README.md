@@ -4,6 +4,8 @@
 
 > It uses the meetup.com v3 API to query users and **store them in vuex** so we can interact with them.
 
+<h1 align="center"><img src="/static/img/screenshot.png" width="500px" alt="Apps Screenshot" /></h1>
+
 ## Live example
 [https://filipemerker.github.io/vuex-talk-example/](https://filipemerker.github.io/vuex-talk-example/)
 
